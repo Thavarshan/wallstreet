@@ -28,6 +28,10 @@ The diagram is also available as an [editable SVG](docs/assets/wallstreet-pipeli
 
 The pipeline always allows **HOLD**: the safest system often makes no trade. Models make uncertain forecasts, not guarantees.
 
+### Planned hourly market data
+
+Wallstreet's existing [price collector lesson (#6)](https://github.com/Thavarshan/wallstreet/issues/6) now teaches **hourly (`1Hour`) and daily (`1Day`) stock-price bars** from Alpaca's free **IEX** feed. The API connection is **not implemented yet**—this is a guided Python exercise. [Issue #5](https://github.com/Thavarshan/wallstreet/issues/5) covers authenticated requests, [#9](https://github.com/Thavarshan/wallstreet/issues/9) validates incomplete/stale bars, and [#10](https://github.com/Thavarshan/wallstreet/issues/10) schedules best-effort hourly collection through GitHub Actions. The IEX feed represents one exchange, not all US market trades; hourly polling does not provide continuous streaming prices.
+
 ### Advanced research (after the foundations)
 
 The [advanced learning tracks](docs/ADVANCED_RESEARCH.md) extend Wallstreet into a market movement analyzer, a regime-aware strategy laboratory, and an AI research agent that proposes algorithm improvements. Start these only after the prerequisites in their issues:
