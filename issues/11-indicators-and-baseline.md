@@ -43,6 +43,16 @@ Closes `[10, 12, 14, 16, 18]` have a five-day mean of `14`; the fourth-to-fifth 
 - [ ] Output dates match input dates with no future shift.
 - [ ] Pandas and plain Python versions agree.
 
+## Hourly price extension
+
+First complete the **daily** five-number example above. Then reuse the **same** indicator function with a requested timeframe—`1Hour` or `1Day`. A 5-bar moving average means **five completed hourly bars** in the hourly mode, but **five completed trading days** in daily mode. Never mix both in one rolling window.
+
+1. Ask storage for one symbol, feed and timeframe sorted chronologically; reject mixed input.
+2. Exclude unfinished/failed-quality hourly bars from issue 09.
+3. Show the timeframe and source feed next to every indicator value. Keep the original buy-and-hold benchmark daily unless you explicitly define an hourly version.
+
+**Extra tests:** mixed timeframes are rejected; five known hourly closes yield the expected 5-bar mean; an unfinished sixth bar cannot alter the fifth bar's result.
+
 ## Acceptance checklist
 
 - [ ] I can explain a moving average without referring to a library.
@@ -56,4 +66,3 @@ Don't treat a moving average as a guarantee that the next price will rise. Indic
 ## Need help?
 
 Ask your AI tutor to explain a concept or review **your attempt**. The goal is to learn Python, not to have the AI finish the ticket. Do not connect real money.
-
