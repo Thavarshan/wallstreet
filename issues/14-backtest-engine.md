@@ -42,6 +42,18 @@ Start with $100, buy 1 share at next-session $20 with a $1 fee → cash $79, sha
 - [ ] Duplicate input bars don't create duplicate trades.
 - [ ] Final equity equals cash plus marked holdings.
 
+## Hourly price extension
+
+Finish the simple daily backtester first. You may later run it on hourly bars collected in issue 06, but an hourly strategy needs **hourly timing rules**:
+
+1. A signal generated from an hour's completed closing bar may fill **no earlier than a later available bar**, never inside the hour it measured.
+2. A one-exchange IEX bar is a **research approximation**, not proof that your simulated quantity could have traded at that price. Explain the resulting execution uncertainty.
+3. Don't carry `next bar` directly across a weekend or holiday as if markets ran continuously. Use issue 09's trading calendar and refuse unavailable fills.
+4. Measure assumed spread, slippage and fees; intraday turnover can make a “profitable” backtest lose money.
+5. Keep separate daily versus hourly experiment results, with `timeframe`, `feed`, data ranges and price-adjustment policy in each report.
+
+**Extra tests:** an hourly signal cannot fill on its own bar; missing next-hour data means no invented fill; an overnight/weekend gap does not produce a synthetic trade.
+
 ## Acceptance checklist
 
 - [ ] A tiny example can be verified by hand.
@@ -55,4 +67,3 @@ Don't use the day's closing price to generate a signal and pretend you already f
 ## Need help?
 
 Ask your AI tutor to explain a concept or review **your attempt**. The goal is to learn Python, not to have the AI finish the ticket. Do not connect real money.
-
