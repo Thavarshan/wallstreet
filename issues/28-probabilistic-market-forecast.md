@@ -44,6 +44,18 @@ Across 100 untouched test cases where the model predicts about 0.70 probability 
 - [ ] Prediction returns a bounded probability or UNKNOWN.
 - [ ] Results can be reproduced from recorded data/model versions.
 
+## Hourly price extension (optional advanced experiment)
+
+Keep the **next-day** prediction task as your first model. Once your daily experiment is sound, test **next-completed-hour direction** as a *separate* experiment—not as a silent change to the original label.
+
+1. Freeze one exact hourly horizon and feature availability time. All features must have been usable **before** the future outcome interval.
+2. Split data chronologically by trading session; leave a gap where overlapping rolling windows could leak information.
+3. Compare against an hourly majority-class/always-HOLD baseline and include fees, spreads and missing IEX bars.
+4. Record `timeframe=1Hour`, `feed=iex`, coverage dates and model version. Explain that IEX-only coverage may bias apparent performance.
+5. The AI can propose strategies for **review**, never edit risk rules or place real orders automatically.
+
+**Extra tests:** next-hour labels cannot be read by current-hour features; a market-closed gap isn't labeled as a zero return; missing hourly data produces UNKNOWN.
+
 ## Acceptance criteria
 
 - [ ] Model output is an uncertainty estimate, not a BUY instruction.
@@ -57,4 +69,3 @@ A confident probability from an uncalibrated model is not a measured likelihood.
 ## How to get help without losing the learning experience
 
 Ask your AI tutor to explain one unfamiliar term, show a toy example unrelated to the whole feature, or review **your implementation attempt**. The AI should not solve the issue wholesale unless you explicitly request it. This issue is research/paper-only; no live orders or withdrawals.
-
