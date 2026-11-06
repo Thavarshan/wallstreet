@@ -24,9 +24,8 @@ Each issue explains **why** the feature exists, **what Python concepts** you wil
 
 ```mermaid
 flowchart LR
-    A["Collect data"] --> B["Analyze market"]
-    B --> C["Backtest + risk checks"]
-    C --> D["Paper trade + report"]
+    A["Collect and store data"] --> B["Analyze, backtest, check risk"]
+    B --> C["Paper trade and report"]
 ```
 
 The pipeline always allows **HOLD**: the safest system often makes no trade. Models make uncertain forecasts, not guarantees.
