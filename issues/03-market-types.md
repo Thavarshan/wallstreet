@@ -40,6 +40,21 @@ Valid: `{'symbol': 'AAPL', 'date': '2026-01-05', 'open': '100', 'high': '105', '
 - [ ] `high < low`, `open > high`, and missing required fields fail clearly.
 - [ ] The original input dictionary is not unexpectedly modified.
 
+## Hourly price extension (do this before issue 06)
+
+The first toy example uses a **daily** `date` because it is easier to understand. The real API will also return **hourly** bars, so extend the same `PriceBar` model after your first tests pass.
+
+1. Import `datetime` and `timezone` in addition to `date`. Define `bar_start_utc` as a **timezone-aware datetime**, `timeframe` as `1Hour` or `1Day`, and `provider`/`feed` as strings. A separate `trading_date` can help with daily display, but it cannot uniquely identify hourly bars.
+2. Construct an hourly example for `AAPL` at `2026-10-05T14:00:00Z` and a daily example on the same date. They are *different* `PriceBar` records.
+3. Make `from_dict` reject an unknown timeframe, a timestamp without a timezone, and impossible prices. Think of `datetime` as Python's equivalent of a date-time object you would normally handle with Carbon in Laravel.
+4. Keep `Decimal` for prices; don't add unrelated stock prediction logic to the model.
+
+### Extra tests
+
+- [ ] `1Hour` and `1Day` records on the same date remain distinct.
+- [ ] A naive `datetime` (missing timezone) is rejected.
+- [ ] Unknown timeframes fail with a useful message.
+
 ## Acceptance checklist
 
 - [ ] I understand why `for key, value in row.items()` works.
@@ -53,4 +68,3 @@ Avoid naming variables `list`, `dict`, or `set`; that shadows Python built-ins. 
 ## Need help?
 
 Ask your AI tutor to explain a concept or review **your attempt**. The goal is to learn Python, not to have the AI finish the ticket. Do not connect real money.
-
