@@ -10,10 +10,10 @@ Wallstreet is a learning project for Jerome. It is **not** a ready-made trading 
 
 1. Read [How to learn with this repository](docs/LEARNING_GUIDE.md).
 2. Look through the [roadmap](docs/ROADMAP.md).
-3. Open **Issue 01: Set up Python and run the project**.
+3. Open **[Issue #1: Set up Python and run the project](https://github.com/Thavarshan/wallstreet/issues/1)**.
 4. Finish one issue, run its tests, and leave yourself notes before starting the next.
 
-Each issue explains **why** the feature exists, **what Python concepts** you will practice, **which files to change**, **a small example**, **tests to write**, and **how to know you are done**. You are supposed to write the feature code yourself. Ask an AI assistant for explanations, examples, and code reviews—not a complete solution unless you change your mind.
+Each issue explains **why** the feature exists, **what Python concepts** you will practice, **which files to change**, **a small example**, **tests to write**, and **how to know you are done**. You are supposed to write the feature code yourself. Ask an AI assistant for explanations, examples, and code reviews—not a complete solution unless you change your mind. The [roadmap links to every lesson](docs/ROADMAP.md#issue-index).
 
 ## What you will eventually build
 
