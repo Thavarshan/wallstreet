@@ -1,58 +1,74 @@
-# 10 — Schedule safe daily collection with GitHub Actions
+# 10 — Schedule hourly stock-price collection with GitHub Actions
 
 **Phase:** B · Trusted datasets  
-**Estimated learning time:** 3–5 hours  
+**Estimated learning time:** 4–6 hours  
 **Prerequisite:** Finish issue 09 first.
 
 ## Why we're doing this
 
-Research shouldn't depend on your Mac staying awake. GitHub Actions can run Python on a schedule, but runners are temporary and schedules can be delayed. You must plan where results actually persist.
+You asked for **hourly prices without paying to run a server**. A scheduled GitHub Actions job can wake up, execute your Python collector and stop. Your Mac can stay off. But GitHub schedules are **best effort, not exact clocks**, and each runner has temporary storage, so success is more than seeing a green check.
 
 ## What you'll learn
 
-- GitHub workflow YAML, cron expressions in UTC, job permissions
-- Environment secrets and least privilege
-- The difference between an ephemeral runner and persistent storage
+- GitHub Actions `schedule` and `workflow_dispatch` triggers
+- Cron fields, UTC, environment secrets, minimal workflow permissions
+- Concurrency, idempotency, retry/backfill and persistent versus temporary files
+- How to budget free API and CI minutes
 
 ## Files to inspect or create
 
 - `.github/workflows/tests.yml` (review)
-- `.github/workflows/collect.yml` (new)
+- `.github/workflows/collect.yml` (new; you write it)
 - `docs/OPERATIONS.md` (new)
+- `tests/test_collection_schedule.py` (new unit tests for calendar/clock decisions)
 
 ## Build it yourself — step by step
 
-1. Read the official GitHub `schedule` event documentation and note that scheduled workflows may be delayed or disabled after inactivity on public repos.
-2. Create a workflow with `workflow_dispatch` so you can run it manually. Initially schedule once daily, several minutes away from the top of an hour.
-3. Install the Python package and run the same safe CLI collection command you already tested locally.
-4. Start with dry-run mode. A successful job log must show which symbols would be collected without exposing secrets.
-5. Document that `data/wallstreet.sqlite3` disappears when the runner ends. Choose and implement a permitted persistent storage path only after understanding the tradeoffs (e.g., a Cloudflare D1 adapter in a later task). Do not claim persistence before it works.
-6. Add explicit minimal `permissions:` and secret names as environment variables. Do not print credentials to logs.
-7. Make the job return a failure status on provider errors and record last success timestamps in durable storage when available.
-8. Run the workflow manually and inspect its logs. Document the free-tier budget and missed-run recovery.
+1. Read [GitHub's schedule event documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule). Scheduled runs use the default branch, and GitHub warns they can be delayed or dropped at busy times. **Do not base your algorithm on a promise of an exact hourly launch.**
+2. Start with both a manual `workflow_dispatch` trigger and an hourly-ish weekday cron, for example `17 * * * 1-5`. This means “17 minutes after each hour on weekdays” in the default UTC interpretation. The schedule can fire outside US market hours; your **Python code** must check market sessions with `zoneinfo`/the calendar from issue 09.
+3. Why minute 17? It avoids the highest-load first minute of an hour, and it lets completed hours settle. **It does not guarantee** that historical data is accessible: the free feed may limit access to the newest 15 minutes. Handle provider availability checks and retrieve only confirmed finalized intervals.
+4. Reuse your one collector from issue 06: call `python -m wallstreet collect-prices --timeframe 1Hour --symbols AAPL MSFT` (adjust to the actual CLI you built). Run **`--dry-run` first**, then a read-only collection. Keep any optional daily refresh as a separate CLI mode or an additional scheduled invocation.
+5. Add `permissions: contents: read` unless the workflow truly needs more. Configure `ALPACA_API_KEY_ID` and `ALPACA_SECRET_KEY` as GitHub Actions **secrets**. Never commit or print keys. This is market-data access, **not** brokerage order authorization.
+6. Add `concurrency` with an explicit group and `cancel-in-progress: false` (or equivalent policy) so two jobs don't overwrite one another or race for a shared store. Keep requests sequential for the initial two-symbol watchlist.
+7. Check the market calendar (including a **post-close window to fetch the final completed bar**), and **also look for missed completed bars** since the last durable checkpoint. GitHub may run late or skip an hour. Fetch a small overlapping range and upsert by `provider/feed/symbol/timeframe/start`, with a bounded historical backfill window. Do not depend on “exactly one bar per run.”
+8. **Solve persistence honestly.** GitHub runner files (including a local SQLite DB) disappear when the job ends. A cache or temporary artifact is not your live database. In `docs/OPERATIONS.md`, choose a permitted persistent option (potential later Cloudflare D1 adapter, after verifying current free-tier limits), or state clearly that this stage runs in dry-run/report-only mode without history surviving.
+9. If credentials are missing, a provider fails, data is stale, the free quota is exceeded or durable storage is unavailable, **stop or report `unavailable`**. Don't fabricate prices and don't submit paper/live orders.
+10. Test manually through the Actions UI, inspect logs for missing bar recovery, and document the free-tier minutes/API-call estimates. Revisit usage before increasing watchlist size or frequency.
+11. Add an operations note: how to re-run a failed collection safely, how to disable the schedule, and how to verify the most recent stored completed bar.
 
-## Concrete example
+## Example scheduling snippet (illustration, not the full workflow)
 
-A manual run on Tuesday prints a dry-run summary. A second run must not duplicate Tuesday's records in the persistent store, once configured.
+```yaml
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * 1-5"
+```
+
+**Important:** GitHub may delay the run. A normal Monday trading session is based on **New York local time**, which changes its UTC offset seasonally. Your Python market calendar decides what should be collected; cron doesn't know US market holidays.
 
 ## Tests to write
 
-- [ ] YAML parses and the job passes locally equivalent tests.
-- [ ] Secrets are referenced, never hardcoded.
-- [ ] One failed provider call results in a visible failure state.
-- [ ] Dry-run does not send an order or write fabricated prices.
+- [ ] Workflow YAML is valid and can be triggered manually.
+- [ ] The Python session guard skips a fixed holiday or market-closed timestamp.
+- [ ] A missed scheduled hour is recovered by overlapping, deduplicated collection.
+- [ ] Running twice doesn't duplicate the same saved `1Hour` bar.
+- [ ] No run consumes an unfinished bar as historical input.
+- [ ] Provider failure is visible; secrets never appear in logs.
+- [ ] `--dry-run` neither writes prices nor places orders.
 
 ## Acceptance checklist
 
-- [ ] I can explain what cron does.
-- [ ] Scheduled and manual paths use the same Python command.
-- [ ] The documentation honestly describes persistence and schedule limitations.
+- [ ] I can explain what `17 * * * 1-5` means.
+- [ ] Hourly collection is configured using the **existing** collector, not a separate trading bot.
+- [ ] Documentation states exactly where data persists (or that it does not yet).
+- [ ] Missed runs, provider delays and quota exhaustion fail safely.
+- [ ] No live-trading workflow exists.
 
 ## Common pitfall
 
-A GitHub Actions cache or artifact isn't a replacement for a transactional database. Do not commit a constantly changing SQLite file to a public Git repo.
+Polling hourly is **not a real-time streaming feed**. Even if the underlying free IEX feed is real-time, the collector only stores whatever completed historical bars are accessible when the job runs.
 
 ## Need help?
 
-Ask your AI tutor to explain a concept or review **your attempt**. The goal is to learn Python, not to have the AI finish the ticket. Do not connect real money.
-
+Ask your AI tutor to explain each YAML line or review your first workflow and logs. Implement it yourself, one step at a time.
