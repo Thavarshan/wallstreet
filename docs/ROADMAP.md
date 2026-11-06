@@ -5,7 +5,7 @@ Do these in order. The **issue numbers are the intended learning sequence**, not
 | Phase | Issues | Outcome |
 | --- | --- | --- |
 | A. Python foundations | 01–03 | Run a CLI, understand collections and functions, write tests |
-| B. Build trusted datasets | 04–10 | Store price/news/filings data and refresh it safely |
+| B. Build trusted datasets | 04–10 | Learn to store hourly/daily IEX price bars, news and filings; validate and refresh them safely |
 | C. Think before trading | 11–15 | Analyze patterns, label news, test strategies honestly |
 | D. Simulate safely | 16–19 | Risk rules, paper broker, portfolio and reports |
 | E. Observe and assess | 20–22 | Dashboard, operations, international broker readiness |
@@ -25,11 +25,11 @@ Do these in order. The **issue numbers are the intended learning sequence**, not
 
 4. [#4 — Store records in SQLite](https://github.com/Thavarshan/wallstreet/issues/4)
 5. [#5 — Fetch HTTP data safely](https://github.com/Thavarshan/wallstreet/issues/5)
-6. [#6 — Collect daily stock prices](https://github.com/Thavarshan/wallstreet/issues/6)
+6. [#6 — Collect hourly and daily stock bars from Alpaca IEX](https://github.com/Thavarshan/wallstreet/issues/6)
 7. [#7 — Collect financial news with RSS](https://github.com/Thavarshan/wallstreet/issues/7)
 8. [#8 — Read fundamentals from SEC filings](https://github.com/Thavarshan/wallstreet/issues/8)
 9. [#9 — Check data quality and market calendars](https://github.com/Thavarshan/wallstreet/issues/9)
-10. [#10 — Schedule collection with GitHub Actions](https://github.com/Thavarshan/wallstreet/issues/10)
+10. [#10 — Schedule hourly collection with GitHub Actions](https://github.com/Thavarshan/wallstreet/issues/10)
 
 ### C. Analysis and honest backtesting
 
@@ -77,6 +77,17 @@ Do these in order. The **issue numbers are the intended learning sequence**, not
 37. [#37 — Evaluate candidate strategies independently](https://github.com/Thavarshan/wallstreet/issues/37)
 38. [#38 — Detect model drift and trigger research](https://github.com/Thavarshan/wallstreet/issues/38)
 39. [#39 — Approve or roll back paper strategies with an audit trail](https://github.com/Thavarshan/wallstreet/issues/39)
+
+### Hourly market-data path
+
+The first price-data lessons now explicitly support **hourly and daily bars** without duplicating the collector:
+
+1. [#3](https://github.com/Thavarshan/wallstreet/issues/3) and [#4](https://github.com/Thavarshan/wallstreet/issues/4): extend the Python bar model and SQLite unique key so hourly records do not overwrite daily records.
+2. [#5](https://github.com/Thavarshan/wallstreet/issues/5) and [#6](https://github.com/Thavarshan/wallstreet/issues/6): connect to Alpaca's free **IEX** feed and parse `1Hour` / `1Day` records from its documented historical-bars endpoint.
+3. [#9](https://github.com/Thavarshan/wallstreet/issues/9) and [#10](https://github.com/Thavarshan/wallstreet/issues/10): check bar completion, US market calendars and data freshness; schedule hourly collection with a way to catch up after missed runs.
+4. [#11](https://github.com/Thavarshan/wallstreet/issues/11), [#14](https://github.com/Thavarshan/wallstreet/issues/14), [#23](https://github.com/Thavarshan/wallstreet/issues/23), [#24](https://github.com/Thavarshan/wallstreet/issues/24), and [#28](https://github.com/Thavarshan/wallstreet/issues/28): explicitly separate hourly research from daily research and prevent future-price leakage.
+
+**What this does not mean:** the API integration or workflow is implemented already. Wallstreet is a Python learning scaffold: **Jerome writes the collector himself** following the issues. GitHub Actions is periodic polling rather than continuously streaming real-time quotes. Alpaca's Basic feed covers **IEX only**, not the consolidated US market. Validate its current pricing, historical access, terms and free quotas before enabling requests. Historical availability may lag; the safest strategy output remains `HOLD`.
 
 ### Progress tracking
 
