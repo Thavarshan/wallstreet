@@ -43,6 +43,17 @@ If recent closes are `[100, 102, 101, 105]`, daily returns are approximately +2%
 - [ ] Short series returns unavailable, not fabricated values.
 - [ ] No external network calls occur.
 
+## Hourly price extension
+
+After daily movement calculations work, allow a `1Hour` data series **separately**. A `20-bar` trend will then mean 20 **completed market-hour bars**, not 20 days. Do not use 24 clock hours to mean one US trading day.
+
+1. Require the same `provider`, `feed` and `timeframe` throughout each calculation.
+2. Check quality flags from issue 09 and refuse stale, incomplete or fabricated hours.
+3. Report intraday volume ratios only against comparable windows; IEX volume represents activity on **one exchange**, not all US trading.
+4. Label output units (`hourly return`, `per-hour volatility`) and avoid applying daily annualization rules to hourly results.
+
+**Extra tests:** no weekend placeholders enter rolling windows; `1Hour` and `1Day` outputs differ when fed different fixtures; an absent IEX bar returns unavailable.
+
 ## Acceptance criteria
 
 - [ ] A movement report explains direction, turbulence, and volume separately.
@@ -56,4 +67,3 @@ Don't equate high volatility with an opportunity to profit. High volatility can 
 ## How to get help without losing the learning experience
 
 Ask your AI tutor to explain one unfamiliar term, show a toy example unrelated to the whole feature, or review **your implementation attempt**. The AI should not solve the issue wholesale unless you explicitly request it. This issue is research/paper-only; no live orders or withdrawals.
-
