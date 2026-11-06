@@ -1,5 +1,10 @@
 # Wallstreet
 
+[![Tests](https://github.com/Thavarshan/wallstreet/actions/workflows/tests.yml/badge.svg)](https://github.com/Thavarshan/wallstreet/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue.svg)
+[![GitHub issues](https://img.shields.io/github/issues/Thavarshan/wallstreet)](https://github.com/Thavarshan/wallstreet/issues)
+
 **Learn Python by building an honest, AI-assisted stock-market research and paper-trading app, one GitHub issue at a time.**
 
 Wallstreet is a learning project for Jerome. It is **not** a ready-made trading bot, an investment recommendation service, or a promise of passive income. The goal is to understand the data, write the Python yourself, test every decision, and eventually simulate an entire portfolio safely.
@@ -70,6 +75,8 @@ On Windows, activate with `.venv\Scripts\activate`. If `python` is not found, tr
 | `issues/` | Markdown copies of the planned learning issues |
 | `.github/workflows/` | Continuous-integration checks, later scheduled jobs |
 | `.env.example` | Placeholder names for configuration, **never actual secrets** |
+| `CONTRIBUTING.md` | How to help without taking away the learning experience |
+| `SECURITY.md` | How to report vulnerabilities privately |
 
 ## Our rules
 
@@ -104,6 +111,14 @@ See the later broker-readiness issue before connecting anything live.
 
 No strategy is risk-free. A forecast can be wrong, a stop can execute at a worse price, and a paper account can look better than real trading. Use money you can afford to lose only after separate research and authorization. This repository is educational, not financial advice.
 
+## Community and contributing
+
+Wallstreet is open source and welcomes bug reports, documentation improvements, constructive reviews, and Python learning questions. Please read the [contribution guide](CONTRIBUTING.md), [Code of Conduct](CODE_OF_CONDUCT.md), and [support guide](SUPPORT.md). Use the [issue templates](.github/ISSUE_TEMPLATE) to make your question or proposal easy to understand.
+
+This remains Jerome's learning project: contributors and AI agents should help **explain and review**, not silently complete every lesson. See [AGENTS.md](AGENTS.md) for the expectations placed on coding assistants. Significant changes are recorded in the [changelog](CHANGELOG.md).
+
+For vulnerabilities or accidental secret exposure, follow the [security policy](SECURITY.md) rather than opening a public issue.
+
 ## License
 
-No license has been selected yet. Jerome can add one before inviting outside contributions.
+Licensed under the [MIT License](LICENSE). Copyright © 2026 Jerome Thayananthajothy.
