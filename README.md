@@ -23,12 +23,10 @@ Each issue explains **why** the feature exists, **what Python concepts** you wil
 ## What you will eventually build
 
 ```mermaid
-flowchart TD
-    A["Scheduled Python collectors"] --> B["SQLite data and source records"]
-    B --> C["Indicators, news, and research"]
-    C --> D["Strategy and risk checks"]
-    D --> E["Backtesting and paper orders"]
-    E --> F["Portfolio reports and dashboard"]
+flowchart LR
+    A["Collect data"] --> B["Analyze market"]
+    B --> C["Backtest + risk checks"]
+    C --> D["Paper trade + report"]
 ```
 
 The pipeline always allows **HOLD**: the safest system often makes no trade. Models make uncertain forecasts, not guarantees.
