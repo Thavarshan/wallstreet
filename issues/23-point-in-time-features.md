@@ -45,6 +45,16 @@ If the analyzer runs `as_of=2026-10-01` and the dataset also contains a bar date
 - [ ] Same inputs and version produce exactly the same result.
 - [ ] Malformed timestamps are rejected rather than guessed.
 
+## Hourly price extension
+
+A feature snapshot at **10:17 New York time** may only include a particular hourly closing bar if that bar was **fully completed, validated and accessible** by 10:17. Its `bar_start_utc` is **not** necessarily its availability time.
+
+1. Include `timeframe` and `feed` in every hourly feature and source-record ID.
+2. Require `available_at <= as_of` when known; otherwise apply the documented conservative availability policy from issues 06 and 09.
+3. Keep daily and hourly lookbacks separate; use explicit units like `5 completed hourly bars` rather than ambiguous `5 periods`.
+
+**Extra tests:** a record published after `as_of` is excluded even if its bar timestamp is earlier; mixing daily and hourly source IDs is rejected.
+
 ## Acceptance criteria
 
 - [ ] I can explain `as_of` in my own words.
@@ -58,4 +68,3 @@ Don't confuse the timestamp of a price bar with the time an API made it availabl
 ## How to get help without losing the learning experience
 
 Ask your AI tutor to explain one unfamiliar term, show a toy example unrelated to the whole feature, or review **your implementation attempt**. The AI should not solve the issue wholesale unless you explicitly request it. This issue is research/paper-only; no live orders or withdrawals.
-
