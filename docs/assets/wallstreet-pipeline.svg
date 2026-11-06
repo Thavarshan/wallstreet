@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 740" role="img" aria-labelledby="title description">
+  <title id="title">Wallstreet learning pipeline</title>
+  <desc id="description">Three steps from collecting market data to analyzing and backtesting strategies, then simulating paper trades and reviewing portfolio reports. No live trading is involved.</desc>
+
+  <!-- Edit this SVG when the learning roadmap changes, then regenerate the PNG used in README.md. -->
+  <rect width="560" height="740" rx="28" fill="#0F172A"/>
+  <text x="40" y="48" fill="#7DD3FC" font-size="17" font-weight="700" letter-spacing="2" font-family="DejaVu Sans, sans-serif">WALLSTREET / LEARNING ROADMAP</text>
+  <text x="40" y="91" fill="#F8FAFC" font-size="29" font-weight="700" font-family="DejaVu Sans, sans-serif">Research → test → simulate</text>
+
+  <rect x="32" y="125" width="496" height="136" rx="17" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+  <circle cx="80" cy="193" r="27" fill="#2563EB"/>
+  <text x="80" y="202" text-anchor="middle" fill="#FFFFFF" font-size="25" font-weight="700" font-family="DejaVu Sans, sans-serif">1</text>
+  <text x="130" y="187" fill="#F8FAFC" font-size="28" font-weight="700" font-family="DejaVu Sans, sans-serif">Collect + store data</text>
+  <text x="130" y="226" fill="#CBD5E1" font-size="20" font-family="DejaVu Sans, sans-serif">Prices, news, SQLite</text>
+
+  <path d="M280 267 V316" fill="none" stroke="#38BDF8" stroke-width="5" stroke-linecap="round"/>
+  <path d="M269 306 L280 322 L291 306" fill="none" stroke="#38BDF8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="32" y="329" width="496" height="136" rx="17" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+  <circle cx="80" cy="397" r="27" fill="#0891B2"/>
+  <text x="80" y="406" text-anchor="middle" fill="#FFFFFF" font-size="25" font-weight="700" font-family="DejaVu Sans, sans-serif">2</text>
+  <text x="130" y="391" fill="#F8FAFC" font-size="28" font-weight="700" font-family="DejaVu Sans, sans-serif">Analyze + backtest</text>
+  <text x="130" y="430" fill="#CBD5E1" font-size="20" font-family="DejaVu Sans, sans-serif">Signals, costs, risk checks</text>
+
+  <path d="M280 471 V520" fill="none" stroke="#38BDF8" stroke-width="5" stroke-linecap="round"/>
+  <path d="M269 510 L280 526 L291 510" fill="none" stroke="#38BDF8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="32" y="533" width="496" height="136" rx="17" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+  <circle cx="80" cy="601" r="27" fill="#059669"/>
+  <text x="80" y="610" text-anchor="middle" fill="#FFFFFF" font-size="25" font-weight="700" font-family="DejaVu Sans, sans-serif">3</text>
+  <text x="130" y="595" fill="#F8FAFC" font-size="28" font-weight="700" font-family="DejaVu Sans, sans-serif">Paper trade + report</text>
+  <text x="130" y="634" fill="#CBD5E1" font-size="20" font-family="DejaVu Sans, sans-serif">Simulated orders, portfolio</text>
+
+  <text x="280" y="713" text-anchor="middle" fill="#94A3B8" font-size="14" font-family="DejaVu Sans, sans-serif">Educational roadmap · No live orders</text>
+</svg>

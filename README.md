@@ -22,11 +22,9 @@ Each issue explains **why** the feature exists, **what Python concepts** you wil
 
 ## What you will eventually build
 
-```mermaid
-flowchart LR
-    A["Collect and store data"] --> B["Analyze, backtest, check risk"]
-    B --> C["Paper trade and report"]
-```
+![Wallstreet learning pipeline: collect and store market data, analyze and backtest with risk checks, then simulate paper trades and review reports.](docs/assets/wallstreet-pipeline.png)
+
+The diagram is also available as an [editable SVG](docs/assets/wallstreet-pipeline.svg). The PNG is used here because GitHub's mobile app does not consistently render Mermaid diagrams.
 
 The pipeline always allows **HOLD**: the safest system often makes no trade. Models make uncertain forecasts, not guarantees.
 
