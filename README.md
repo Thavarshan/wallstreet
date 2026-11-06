@@ -28,6 +28,16 @@ flowchart TD
 
 The pipeline always allows **HOLD**: the safest system often makes no trade. Models make uncertain forecasts, not guarantees.
 
+### Advanced research (after the foundations)
+
+The [advanced learning tracks](docs/ADVANCED_RESEARCH.md) extend Wallstreet into a market movement analyzer, a regime-aware strategy laboratory, and an AI research agent that proposes algorithm improvements. Start these only after the prerequisites in their issues:
+
+- **[Market movement analyzer — Issues #23–27](https://github.com/Thavarshan/wallstreet/issues/23):** explain trend, volatility, abnormal volume, regime changes, sector breadth, and the effects of published news.
+- **[Adaptive strategy lab — Issues #28–33](https://github.com/Thavarshan/wallstreet/issues/28):** evaluate next-session probabilities, regime-specific rules, position sizing, honest walk-forward tests, and competing paper strategies.
+- **[AI-guided improvement — Issues #34–39](https://github.com/Thavarshan/wallstreet/issues/34):** produce evidence packs, let AI propose configuration or code changes on a branch, test them independently, and create pull requests for human review.
+
+Read the [adaptive-strategy policy](docs/ADAPTIVE_STRATEGY_POLICY.md) before implementing any automated AI changes. **The agent may propose and test changes; it may not self-approve, merge, bypass risk checks, activate live trading, or withdraw money.**
+
 ## Prerequisites
 
 - A Mac, Linux, or Windows computer with Python **3.12 or newer**.

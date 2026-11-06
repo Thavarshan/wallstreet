@@ -9,6 +9,9 @@ Do these in order. The **issue numbers are the intended learning sequence**, not
 | C. Think before trading | 11–15 | Analyze patterns, label news, test strategies honestly |
 | D. Simulate safely | 16–19 | Risk rules, paper broker, portfolio and reports |
 | E. Observe and assess | 20–22 | Dashboard, operations, international broker readiness |
+| F. Market movement analyzer | 23–27 | Time-aware features, trends, volatility, regimes, breadth, and events |
+| G. Adaptive strategy lab | 28–33 | Prediction experiments, regime-based rules, sizing, robustness, and paper challengers |
+| H. AI-guided improvement | 34–39 | Safe AI proposals, candidate code PRs, evaluation, drift, approval and rollback |
 
 ## Issue index
 
@@ -49,6 +52,32 @@ Do these in order. The **issue numbers are the intended learning sequence**, not
 21. [#21 — Monitor reliability, security, and $0 usage](https://github.com/Thavarshan/wallstreet/issues/21)
 22. [#22 — Research broker, Wise, and withdrawal readiness](https://github.com/Thavarshan/wallstreet/issues/22)
 
+### F. Market movement analyzer (advanced)
+
+23. [#23 — Build point-in-time feature snapshots](https://github.com/Thavarshan/wallstreet/issues/23)
+24. [#24 — Analyze trend, volatility, and unusual volume](https://github.com/Thavarshan/wallstreet/issues/24)
+25. [#25 — Classify market regimes and transitions](https://github.com/Thavarshan/wallstreet/issues/25)
+26. [#26 — Measure market breadth and sector strength](https://github.com/Thavarshan/wallstreet/issues/26)
+27. [#27 — Study news and earnings price reactions](https://github.com/Thavarshan/wallstreet/issues/27)
+
+### G. Adaptive strategy lab (advanced)
+
+28. [#28 — Predict market direction with calibrated probabilities](https://github.com/Thavarshan/wallstreet/issues/28)
+29. [#29 — Route strategy rules by market regime](https://github.com/Thavarshan/wallstreet/issues/29)
+30. [#30 — Size positions with a strict risk budget](https://github.com/Thavarshan/wallstreet/issues/30)
+31. [#31 — Choose parameters using walk-forward tests](https://github.com/Thavarshan/wallstreet/issues/31)
+32. [#32 — Stress-test strategies under bad conditions](https://github.com/Thavarshan/wallstreet/issues/32)
+33. [#33 — Compare champion and challenger paper strategies](https://github.com/Thavarshan/wallstreet/issues/33)
+
+### H. AI-guided improvement (advanced)
+
+34. [#34 — Prepare a safe evidence pack for AI](https://github.com/Thavarshan/wallstreet/issues/34)
+35. [#35 — Have AI suggest testable strategy changes](https://github.com/Thavarshan/wallstreet/issues/35)
+36. [#36 — Let AI draft algorithm changes in isolated PRs](https://github.com/Thavarshan/wallstreet/issues/36)
+37. [#37 — Evaluate candidate strategies independently](https://github.com/Thavarshan/wallstreet/issues/37)
+38. [#38 — Detect model drift and trigger research](https://github.com/Thavarshan/wallstreet/issues/38)
+39. [#39 — Approve or roll back paper strategies with an audit trail](https://github.com/Thavarshan/wallstreet/issues/39)
+
 ### Progress tracking
 
 - [ ] Phase A — Python foundations
@@ -56,6 +85,9 @@ Do these in order. The **issue numbers are the intended learning sequence**, not
 - [ ] Phase C — analysis and backtesting
 - [ ] Phase D — paper trading
 - [ ] Phase E — dashboard and readiness review
+- [ ] Phase F — advanced market movement analyzer
+- [ ] Phase G — adaptive strategy lab
+- [ ] Phase H — AI-guided improvements with human review
 
 **Suggested pace:** one or two issues per week. Take longer when a Python concept is new. The goal is *skill gained*, not tickets closed.
 
@@ -68,3 +100,5 @@ After Phase C, your strategy must beat a naive baseline on honest out-of-sample 
 After Phase D, run paper trading for long enough to observe different market conditions. Keep results separate from backtests and include fees/slippage assumptions. A positive paper result is not proof of future live profits.
 
 Phase E is an **investigate-and-document** milestone. It never switches live trading on by itself.
+
+Phases F–H are advanced, optional extensions. The AI agent is a research assistant that can propose changes and open pull requests. It cannot merge itself, relax the risk policy, or trade with real capital. Follow the [adaptive-strategy policy](ADAPTIVE_STRATEGY_POLICY.md) and [experiment template](EXPERIMENT_TEMPLATE.md).
