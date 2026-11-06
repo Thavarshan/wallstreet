@@ -7,7 +7,7 @@
 
 **Learn Python by building an honest, AI-assisted stock-market research and paper-trading app, one GitHub issue at a time.**
 
-Wallstreet is a learning project for Jerome. It is **not** a ready-made trading bot, an investment recommendation service, or a promise of passive income. The goal is to understand the data, write the Python yourself, test every decision, and eventually simulate an entire portfolio safely.
+Wallstreet is an open-source Python learning project. It is **not** a ready-made trading bot, an investment recommendation service, or a promise of passive income. The goal is to understand the data, write the Python yourself, test every decision, and eventually simulate an entire portfolio safely.
 
 > **Current status: learning scaffold only.** No live brokerage connection, real-money order placement, or withdrawals are implemented. Paper trading comes after research, backtesting, and risk controls.
 
@@ -102,7 +102,7 @@ On Windows, activate with `.venv\Scripts\activate`. If `python` is not found, tr
 
 ## International investing and payments
 
-Future broker research should consider international markets, legitimate UK residency and tax details, an existing verified Wise account, and a UK bank account. **Wise is a money-transfer service, not an order-execution engine.** A broker must handle securities. Stripe is not assumed to be a destination for trading proceeds. None of this justifies bypassing account checks or residency requirements.
+Future broker research should verify the applicable residency, tax, account-eligibility, deposit, and withdrawal rules for each jurisdiction. Payment services are not stock brokers and cannot place securities orders. No integration should bypass identity checks or account restrictions.
 
 See the later broker-readiness issue before connecting anything live.
 
@@ -114,10 +114,10 @@ No strategy is risk-free. A forecast can be wrong, a stop can execute at a worse
 
 Wallstreet is open source and welcomes bug reports, documentation improvements, constructive reviews, and Python learning questions. Please read the [contribution guide](CONTRIBUTING.md), [Code of Conduct](CODE_OF_CONDUCT.md), and [support guide](SUPPORT.md). Use the [issue templates](.github/ISSUE_TEMPLATE) to make your question or proposal easy to understand.
 
-This remains Jerome's learning project: contributors and AI agents should help **explain and review**, not silently complete every lesson. See [AGENTS.md](AGENTS.md) for the expectations placed on coding assistants. Significant changes are recorded in the [changelog](CHANGELOG.md).
+This repository is designed for hands-on learning: contributors and AI agents should help **explain and review**, not silently complete every lesson. See [AGENTS.md](AGENTS.md) for the expectations placed on coding assistants. Significant changes are recorded in the [changelog](CHANGELOG.md).
 
 For vulnerabilities or accidental secret exposure, follow the [security policy](SECURITY.md) rather than opening a public issue.
 
 ## License
 
-Licensed under the [MIT License](LICENSE). Copyright © 2026 Jerome Thayananthajothy.
+Licensed under the [MIT License](LICENSE). See the license file for copyright and licensing details.
